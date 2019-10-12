@@ -104,11 +104,6 @@
 
         function updateColor(event) {
             let path = document.querySelector('.path');
-            let strokeWidth = new URLSearchParams(window.location.search).get('stroke');
-
-            if (strokeWidth) {
-                path.style.strokeWidth = strokeWidth;
-            }
 
             let x = event.clientX;
             let y = event.clientY;
