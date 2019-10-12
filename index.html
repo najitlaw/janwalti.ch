@@ -38,19 +38,11 @@
     </div>
 
     <script>
-        console.log(window.location);
-        let urlParams = new URLSearchParams(window.location.search);
-        console.log(urlParams)
-        let stroke = urlParams.get('stroke')
-        console.log(stroke)
-
-
-
         function updateColor(event) {
             let path = document.querySelector('.path');
             let strokeWidth = new URLSearchParams(window.location.search).get('stroke');
 
-            if (stroke) {
+            if (strokeWidth) {
                 path.style.strokeWidth = strokeWidth;
             }
 
