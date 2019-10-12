@@ -38,7 +38,22 @@
     </div>
 
     <script>
+        console.log(window.location);
+        let urlParams = new URLSearchParams(window.location.search);
+        console.log(urlParams)
+        let stroke = urlParams.get('stroke')
+        console.log(stroke)
+
+
+
         function updateColor(event) {
+            let path = document.querySelector('.path');
+            let strokeWidth = new URLSearchParams(window.location.search).get('stroke');
+
+            if (stroke) {
+                path.style.strokeWidth = strokeWidth;
+            }
+
             let x = event.clientX;
             let y = event.clientY;
 
@@ -46,7 +61,7 @@
             let g = y % 255;
             let b = (x + y) % 255;
 
-            let path = document.querySelector('.path');
+
             let rgb = `rgb(${r}, ${g}, ${b}, 0.7)`;
             path.style.fill = rgb;
             path.style.stroke = rgb;
