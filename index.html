@@ -13,6 +13,18 @@
             max-height: 100vh;
         }
 
+        .inputs {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            font-family: monospace;
+            padding-top: 2rem;
+        }
+
+        .label {
+            padding-bottom: 1rem;
+        }
+
         @keyframes dash {
             from {
                 stroke-dashoffset: 3000;
@@ -28,6 +40,7 @@
         <svg class="face" viewBox="0 0 490.94 813.48">
             <path class="path"
                   fill="#000000"
+                  fill-opacity="1"
                   stroke="#000000"
                   stroke-width="2"
                   stroke-opacity="0.4"
@@ -37,7 +50,58 @@
         </svg>
     </div>
 
+    <div class="inputs">
+        <label class="label">
+            Stroke width<br>
+            <input type="range" min="0" max="100" value="2"
+                   oninput="updateStroke(this.value); strokeOut.value = this.value"
+            ><br>
+            <output id="strokeOut">2</output>
+        </label>
+        <label class="label">
+            Dash length<br>
+            <input type="range" min="0" max="1000" value="110"
+                   oninput="updateDasharray(this.value); dasharrayOut.value = this.value"
+            ><br>
+            <output id="dasharrayOut">110</output>
+        </label>
+        <label class="label">
+            Stroke opacity<br>
+            <input type="range" min="0" max="1" value="0.8" step="0.1"
+                   oninput="updateStrokeOpacity(this.value); strokeOpacityOut.value = this.value"
+            ><br>
+            <output id="strokeOpacityOut">0.8</output>
+        </label>
+        <label class="label">
+            Fill opacity<br>
+            <input type="range" min="0" max="1" value="0.9" step="0.1"
+                   oninput="updateFillOpacity(this.value); fillOpacityOut.value = this.value"
+            ><br>
+            <output id="fillOpacityOut">0.9</output>
+        </label>
+    </div>
+
     <script>
+        function updateStroke(v) {
+            let path = document.querySelector('.path');
+            path.style.strokeWidth = v;
+        }
+
+        function updateDasharray(v) {
+            let path = document.querySelector('.path');
+            path.style.strokeDasharray = v;
+        }
+
+        function updateStrokeOpacity(v) {
+            let path = document.querySelector('.path');
+            path.style.strokeOpacity = v;
+        }
+
+        function updateFillOpacity(v) {
+            let path = document.querySelector('.path');
+            path.style.fillOpacity = v;
+        }
+
         function updateColor(event) {
             let path = document.querySelector('.path');
             let strokeWidth = new URLSearchParams(window.location.search).get('stroke');
@@ -52,7 +116,6 @@
             let r = x % 255;
             let g = y % 255;
             let b = (x + y) % 255;
-
 
             let rgb = `rgb(${r}, ${g}, ${b}, 0.7)`;
             path.style.fill = rgb;
